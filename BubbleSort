@@ -1,0 +1,63 @@
+Write a bubble sort program that prints the number of swaps made after M number of iterations. In this case, ‘M’ should be an input value. For example, if M = 0, the bubble sort program will perform 0 comparisons in 0 iterations. In bubble sort, an iteration is defined as the total number of times the outer loop runs. Assume that: 1) M <= the array size and 2) the program sorts in descending order. The code should ask the user to input the values for M, the array size, and finally the elements of the array.
+So, there will be three types of inputs — 
+
+Input 1: The value of M
+Input 2: The size of the array
+Input 3: The elements inside the array
+
+
+import java.util.Scanner;
+  class Source {
+   static int totalBubbleSortSwaps(int[] array, int M) {
+        int n = array.length;
+        int var = 0;
+        int totalSwaps = 0;
+        int i = 0;
+        int swap = 0;
+        int iterationNo = 0;
+        for (i = 0; i < n; i++) {
+            // setting the initial value of swap to zero.
+            iterationNo++;
+            //System.out.println("Iteration Number is "+iterationNo);
+            for (int j = 1; j < n - i; j++) {
+                if (array[j - 1] < array[j]) {
+                    //swapping when element at position j-1 is greater than element at j position.
+                    int temp = array[j - 1];
+                    array[j - 1] = array[j];
+                    array[j] = temp;
+                    swap++;
+                    /* if at any step the swapping is done, we change the swap value to one,
+                    so that we know  that the sequence is not sorted at this step.*/
+
+                }
+            /*This will check if the swap value is not changed to 1, because if the value
+            is not updated then it has not entered the inner loop even once, and no swapping was done.
+            Therefore the sequence is sorted now.*/
+                if (swap == 0) {
+                    break;
+                }
+
+            }
+            if(iterationNo == M)
+                return swap;
+        }
+        //Write your code here
+        return -1;
+    }
+    public static void main(String[] args) {
+        //System.out.println("Enter the no. of elements :");
+        Source obj = new Source();
+
+        Scanner input = new Scanner(System.in);
+        int m = input.nextInt();
+        int n = input.nextInt();
+
+        int[] arr = new int[n];
+        //System.out.println("Enter the elements of the array :");
+        for (int i = 0; i < n; i++) {
+            arr[i] = input.nextInt();
+        }
+        int d = obj.totalBubbleSortSwaps(arr,m);
+        System.out.println(d);
+    }
+}
